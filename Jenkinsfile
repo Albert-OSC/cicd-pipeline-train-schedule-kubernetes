@@ -20,7 +20,7 @@ pipeline {
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
                     app.inside {
-                        sh 'echo "Hello, World!"'
+                        sh 'echo Hello, World!'
                     }
                 }
             }
@@ -43,13 +43,13 @@ pipeline {
                 branch 'master'
             }
             steps {
-                input 'Deploy to Production ?'
+                input 'Deploy to Production?'
                 milestone(1)
                 kubernetesDeploy(
                     kubeconfigId: 'Kube_Config',
                     configs: 'train-schedule-kube.yml',
                     enableConfigSubstitution: true
-                }
+                )
             }
         }
     }
